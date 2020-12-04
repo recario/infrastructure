@@ -10,7 +10,7 @@ spec:
   # "Delete" if you wish the volume to be deleted automatically with the PVC
   # persistentVolumeReclaimPolicy: Delete
   capacity:
-    storage: 10Gi
+    storage: 100Gi
   accessModes:
     - ReadWriteOnce
   csi:
