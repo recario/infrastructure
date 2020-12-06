@@ -1,34 +1,3 @@
-# CronJob
-apiVersion: batch/v1beta1
-kind: CronJob
-metadata:
-  name: backup-database
-spec:
-  schedule: "0 22 * * *"
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          volumes:
-            - name: recario-storage
-              persistentVolumeClaim:
-                claimName: recario-csv-pvc
-          containers:
-          - name: backup-database
-            image: postgres:12.3
-            envFrom:
-              - configMapRef:
-                  name: rails-env-config
-            args:
-            - /bin/sh
-            - -c
-            - cd /var/backups && pg_dump -Fc -h postgresql -U user -d recario > ./recario-$(date +%s).sql.dump && ls -tp | grep -v '/$' | tail -n +6 | xargs -d '\n' -r rm --
-            volumeMounts:
-              - mountPath: "/var/backups"
-                subPath: "postgres-backups"
-                name: recario-storage
-          restartPolicy: OnFailure
----
 # Service
 apiVersion: v1
 kind: Service
