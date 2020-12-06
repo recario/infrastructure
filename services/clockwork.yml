@@ -1,0 +1,24 @@
+# Worker Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clockwork
+  labels:
+    app: clockwork
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clockwork
+  template:
+    metadata:
+      labels:
+        app: clockwork
+    spec:
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: rails-env-config
+        image: recario/server:latest
+        name: clockwork
+        command: ["bundle", "exec", "clockwork", "clock.rb"]
