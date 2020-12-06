@@ -16,7 +16,7 @@ spec:
   csi:
     driver: dobs.csi.digitalocean.com
     fsType: ext4
-    volumeHandle: eb757ff8-da15-11ea-b45d-0a58ac14d0b6
+    volumeHandle: eb757ff8-da15-11ea-b45d-0a58ac14d0b6 # This should be manually copied from `doctl compute volume list` to re-use existing data
     volumeAttributes:
       com.digitalocean.csi/noformat: "true"
 ---
