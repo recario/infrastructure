@@ -63,13 +63,24 @@ metadata:
   name: rails-ingress
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location ~ ^/ios(\/)?$ { return 301 https://apps.apple.com/us/app/id1458212603; }
+      location ~ ^/android(\/)?$ { return 301 https://play.google.com/store/apps/details?id=com.viktorvsk.recario; }
+      location ~ ^/news(\/)?$ { return 301 https://t.me/reCar_io; }
 spec:
   tls:
   - hosts:
     - recar.io
+    - api.recar.io
     secretName: rails-tls
   rules:
   - host: recar.io
+    http:
+      paths:
+      - backend:
+          serviceName: rails
+          servicePort: 80
+  - host: api.recar.io
     http:
       paths:
       - backend:
