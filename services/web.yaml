@@ -67,6 +67,7 @@ metadata:
       location ~ ^/ios(\/)?$ { return 301 https://apps.apple.com/us/app/id1458212603; }
       location ~ ^/android(\/)?$ { return 301 https://play.google.com/store/apps/details?id=com.viktorvsk.recario; }
       location ~ ^/news(\/)?$ { return 301 https://t.me/reCar_io; }
+      location ~ ^/whitepaper(\/)?$ { return 301 https://assets.recar.io/Whitepaper.pdf; }
 spec:
   tls:
   - hosts:
