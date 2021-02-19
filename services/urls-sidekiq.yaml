@@ -1,0 +1,49 @@
+# Worker Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: urls-sidekiq
+  labels:
+    app: urls-sidekiq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: urls-sidekiq
+  template:
+    metadata:
+      labels:
+        app: urls-sidekiq
+    spec:
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: urls-env-config
+        image: recario/urls:latest
+        name: urls-sidekiq
+        command: [
+          "bundle",
+          "exec",
+          "sidekiq",
+          "-e",
+          "development",
+          "-r",
+          "./config/application.rb",
+          "-c",
+          "5",
+          "-q",
+          "provider-auto-ria-scraper",
+          "-q",
+          "provider-auto-ria-actualizer",
+          "-q",
+          "provider-auto-ria-crawler"
+        ]
+      initContainers:
+        - name: db-create-migrate
+          image: recario/urls:latest
+          command: ["bundle", "exec", "rake", "db:create", "db:migrate"]
+          envFrom:
+            - configMapRef:
+                name: urls-env-config
+
+
