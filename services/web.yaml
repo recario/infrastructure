@@ -69,6 +69,7 @@ metadata:
       location ~ ^/android(\/)?$ { return 301 https://play.google.com/store/apps/details?id=com.viktorvsk.recario; }
       location ~ ^/news(\/)?$ { return 301 https://t.me/reCar_io; }
       location ~ ^/whitepaper(\/)?$ { return 301 https://assets.recar.io/Whitepaper.pdf; }
+      location ~ ^/wog(\/)?$ { return 301 https://habr.com/ru/company/kaspersky/blog/508784/; }
 spec:
   tls:
   - hosts:
