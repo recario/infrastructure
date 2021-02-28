@@ -16,7 +16,7 @@ data:
   RAILS_LOG_LEVEL: info
   RAILS_SERVE_STATIC_FILES: "true"
   TURBOSMS_LOGIN: recario
-  TURBOSMS_SENDER: reCar.io
+  TURBOSMS_SENDER: recar.io
   BUNDLE_DISABLE_EXEC_LOAD: "true"
   DO_SPACE_NAME: recario-space
   DO_SPACE_REGION: ams3
