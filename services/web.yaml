@@ -89,4 +89,10 @@ spec:
       - backend:
           serviceName: rails
           servicePort: 80
+  - host: workaround.recar.io
+    http:
+      paths:
+      - backend:
+          serviceName: rails
+          servicePort: 80
 
