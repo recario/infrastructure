@@ -60,7 +60,7 @@ spec:
           - "-c"
           - "effective_io_concurrency=200"
           - "-c"
-          - "work_mem=1600kB"
+          - "work_mem=4096kB"
           - "-c"
           - "min_wal_size=1GB"
           - "-c"
