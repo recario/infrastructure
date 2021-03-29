@@ -36,6 +36,10 @@ spec:
             claimName: recario-csv-pvc
       containers:
       - image: postgres:12.3
+        resources:
+          requests:
+            cpu: "1"
+            memory: "1.1Gi"
         name: postgresql
         command:
           - "./docker-entrypoint.sh"
