@@ -36,25 +36,21 @@ spec:
             claimName: recario-csv-pvc
       containers:
       - image: postgres:12.3
-        resources:
-          requests:
-            cpu: "3"
-            memory: "4.5Gi"
         name: postgresql
         command:
           - "./docker-entrypoint.sh"
           - "-c"
           - "max_connections=200"
           - "-c"
-          - "shared_buffers=1280MB"
+          - "shared_buffers=256MB"
           - "-c"
-          - "effective_cache_size=3840MB"
+          - "effective_cache_size=768MB"
           - "-c"
-          - "maintenance_work_mem=320MB"
+          - "maintenance_work_mem=64MB"
           - "-c"
           - "checkpoint_completion_target=0.7"
           - "-c"
-          - "wal_buffers=16MB"
+          - "wal_buffers=7864kB"
           - "-c"
           - "default_statistics_target=100"
           - "-c"
@@ -62,19 +58,19 @@ spec:
           - "-c"
           - "effective_io_concurrency=200"
           - "-c"
-          - "work_mem=3276kB"
+          - "work_mem=655kB"
           - "-c"
           - "min_wal_size=1GB"
           - "-c"
           - "max_wal_size=4GB"
           - "-c"
-          - "max_worker_processes=3"
+          - "max_worker_processes=1"
           - "-c"
-          - "max_parallel_workers_per_gather=2"
+          - "max_parallel_workers_per_gather=1"
           - "-c"
-          - "max_parallel_workers=2"
+          - "max_parallel_workers=1"
           - "-c"
-          - "max_parallel_maintenance_workers=2"
+          - "max_parallel_maintenance_workers=1"
         envFrom:
           - configMapRef:
               name: rails-env-config
