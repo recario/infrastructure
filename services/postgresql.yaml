@@ -34,22 +34,25 @@ spec:
         - name: recario-storage
           persistentVolumeClaim:
             claimName: recario-csv-pvc
+        - name: dshm
+          emptyDir:
+            medium: Memory
       containers:
       - image: postgres:12.3
         resources:
           requests:
-            memory: "2Gi"
+            memory: "5.5Gi"
         name: postgresql
         command:
           - "./docker-entrypoint.sh"
           - "-c"
           - "max_connections=200"
           - "-c"
-          - "shared_buffers=512MB"
+          - "shared_buffers=1280MB"
           - "-c"
-          - "effective_cache_size=1536MB"
+          - "effective_cache_size=3840MB"
           - "-c"
-          - "maintenance_work_mem=128MB"
+          - "maintenance_work_mem=320MB"
           - "-c"
           - "checkpoint_completion_target=0.7"
           - "-c"
@@ -61,19 +64,19 @@ spec:
           - "-c"
           - "effective_io_concurrency=200"
           - "-c"
-          - "work_mem=2621kB"
+          - "work_mem=3276kB"
           - "-c"
           - "min_wal_size=1GB"
           - "-c"
           - "max_wal_size=4GB"
           - "-c"
-          - "max_worker_processes=2"
+          - "max_worker_processes=3"
           - "-c"
-          - "max_parallel_workers_per_gather=1"
+          - "max_parallel_workers_per_gather=2"
           - "-c"
-          - "max_parallel_workers=2"
+          - "max_parallel_workers=3"
           - "-c"
-          - "max_parallel_maintenance_workers=1"
+          - "max_parallel_maintenance_workers=2"
         envFrom:
           - configMapRef:
               name: rails-env-config
@@ -84,3 +87,5 @@ spec:
           - mountPath: "/var/backups"
             subPath: "postgres-backups"
             name: recario-storage
+          - mountPath: /dev/shm
+            name: dshm
