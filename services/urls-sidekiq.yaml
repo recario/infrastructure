@@ -30,13 +30,13 @@ spec:
           "-r",
           "./config/application.rb",
           "-c",
-          "5",
+          "16",
           "-q",
-          "provider-auto-ria-scraper",
+          "provider-auto-ria-scraper, 10",
           "-q",
-          "provider-auto-ria-actualizer",
+          "provider-auto-ria-actualizer, 1000",
           "-q",
-          "provider-auto-ria-crawler"
+          "provider-auto-ria-crawler, 100"
         ]
       initContainers:
         - name: db-create-migrate
